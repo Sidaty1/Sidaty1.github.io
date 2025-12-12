@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sidaty El Hadramy</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f9fafb;
+    }
+
+    header {
+      background-color: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #4b5563;
+      font-weight: 500;
+      font-size: 1.1rem;
+      padding-bottom: 0.25rem;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s;
+    }
+
+    nav a:hover, nav a.active {
+      color: #4f46e5;
+      border-bottom-color: #4f46e5;
+    }
+
+    .teaching-section {
+      margin-bottom: 3rem;
+    }
+
+    .teaching-section h2 {
+      font-size: 1.8rem;
+      color: #111827;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #4f46e5;
+    }
+
+    .course-card {
+      background-color: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      margin-bottom: 1.5rem;
+      border-left: 4px solid #4f46e5;
+    }
+
+    .course-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 0.5rem;
+    }
+
+    .course-code {
+      color: #4f46e5;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .course-description {
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .students-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .student-card {
+      background-color: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      border-top: 3px solid #4f46e5;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .student-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .student-name {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 0.5rem;
+    }
+
+    .student-degree {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+    }
+
+    .degree-phd {
+      background-color: #dbeafe;
+      color: #1e40af;
+    }
+
+    .degree-master {
+      background-color: #dcfce7;
+      color: #166534;
+    }
+
+    .student-thesis {
+      color: #374151;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+    }
+
+    .student-paper {
+      margin-top: 0.75rem;
+    }
+
+    .student-paper a {
+      color: #4f46e5;
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .student-paper a:hover {
+      text-decoration: underline;
+    }
+
+    .student-paper a:after {
+      content: "→";
+      font-weight: bold;
+    }
+
+    .student-years {
+      color: #6b7280;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .profile-section {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .profile-image {
+      width: 250px;
+      height: 300px;
+      border-radius: 12px;
+      object-fit: cover;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+    }
+
+    .profile-info {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #111827;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: #111827;
+      margin-bottom: 1rem;
+      margin-top: 3rem;
+    }
+
+    h2:first-child {
+      margin-top: 0;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      color: #111827;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.3rem;
+      color: #4b5563;
+      margin-bottom: 0.25rem;
+    }
+
+    .affiliation {
+      font-size: 1.1rem;
+      color: #6b7280;
+      margin-bottom: 1.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #4f46e5;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .social-links a:hover {
+      color: #4338ca;
+    }
+
+    .email {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #4b5563;
+    }
+
+    .email a {
+      color: #4b5563;
+      text-decoration: none;
+    }
+
+    .email a:hover {
+      color: #4f46e5;
+    }
+
+    .bio {
+      color: #374151;
+      line-height: 1.8;
+      text-align: justify;
+    }
+
+    .research-spotlight {
+      background-color: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      border-radius: 4px;
+    }
+
+    .research-spotlight h3 {
+      color: #92400e;
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .research-spotlight h3:before {
+      content: "⚡";
+      font-size: 1.3rem;
+    }
+
+    .research-spotlight p {
+      color: #78350f;
+      line-height: 1.7;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .info-section h3 {
+      font-size: 1.2rem;
+      color: #111827;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .education-entry {
+      margin-bottom: 0.75rem;
+    }
+
+    .education-entry:last-child {
+      margin-bottom: 0;
+    }
+
+    .edu-degree {
+      font-weight: 500;
+      color: #111827;
+      font-size: 0.95rem;
+    }
+
+    .edu-school {
+      color: #6b7280;
+      font-size: 0.9rem;
+    }
+
+    .edu-year {
+      color: #9ca3af;
+      font-size: 0.85rem;
+    }
+
+    .interests-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .interests-list li {
+      padding: 0.4rem 0;
+      color: #374151;
+      font-size: 0.95rem;
+      position: relative;
+      padding-left: 1rem;
+    }
+
+    .interests-list li:before {
+      content: "•";
+      color: #4f46e5;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+
+    .news-item {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .news-date {
+      color: #4f46e5;
+      font-weight: 600;
+      min-width: 100px;
+    }
+
+    .news-content {
+      color: #374151;
+    }
+
+    .publication {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      align-items: flex-start;
+    }
+
+    .pub-image {
+      width: 200px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+    }
+
+    .pub-info {
+      flex: 1;
+    }
+
+    .pub-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 0.5rem;
+    }
+
+    .pub-title a {
+      color: #111827;
+      text-decoration: none;
+    }
+
+    .pub-title a:hover {
+      color: #4f46e5;
+    }
+
+    .pub-authors {
+      color: #4b5563;
+      margin-bottom: 0.25rem;
+    }
+
+    .pub-venue {
+      color: #4f46e5;
+      font-weight: 500;
+    }
+
+    .pub-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .tag-deep-learning {
+      background-color: #dbeafe;
+      color: #1e40af;
+    }
+
+    .tag-medical-imaging {
+      background-color: #dcfce7;
+      color: #166534;
+    }
+    
+    .tag-award {
+      background-color: #5e1914;
+      color: #f94449;
+    }
+
+    .tag-biomechanics {
+      background-color: #fef3c7;
+      color: #92400e;
+    }
+
+    .year-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .year-title {
+      font-size: 1.5rem;
+      color: #111827;
+      margin-bottom: 1rem;
+    }
+
+    .pub-item {
+      border-left: 4px solid #4f46e5;
+      padding-left: 1rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .pub-item-image {
+      width: 150px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+    }
+
+    .pub-item-content {
+      flex: 1;
+    }
+
+    footer {
+      background-color: white;
+      border-top: 1px solid #e5e7eb;
+      margin-top: 5rem;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      color: #6b7280;
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+    }
+
+      @media (max-width: 768px) {
+      .profile-section {
+        flex-direction: column;
+      }
+
+      .profile-image {
+        width: 100%;
+        max-width: 250px;
+      }
+
+      .publication {
+        flex-direction: column;
+      }
+
+      .pub-image {
+        width: 100%;
+        height: auto;
+      }
+
+      .pub-item {
+        flex-direction: column;
+      }
+
+      .pub-item-image {
+        width: 100%;
+        height: auto;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="#" class="nav-link active" data-page="home">Home</a>
+      <a href="#" class="nav-link" data-page="publications">Full publication list</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Home Page -->
+    <div id="home" class="page active">
+      <div class="profile-section">
+        <img src="me.png" class="profile-image" alt="Sidaty El Hadramy">
+        <div class="profile-info">
+          <h1>Sidaty El Hadramy, PhD.</h1>
+          <p class="subtitle"><strong>Postdoctoral Researcher</strong></p>
+          <p class="subtitle"><a href="https://dbe.unibas.ch/en/research/flagship-project-miracle/">MIRACLE II</a> Technical coordinator</p>
+          <p class="affiliation">University of Basel</p>
+          
+          <div class="social-links">
+            <a href="https://scholar.google.com/citations?user=ThzUNksAAAAJ&hl=fr" target="_blank" rel="noopener noreferrer">
+  <svg class="icon" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M12 24a7 7 0 110-14 7 7 0 010 14zm0-24L0 9.5l4.838 3.635L12 7.227l7.162 5.908L24 9.5z"/>
+  </svg>
+  Google Scholar
+</a>
+            <a href="https://github.com/Sidaty1" target="_blank" rel="noopener noreferrer">
+              <svg class="icon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+              GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/sidaty-el-hadramy-25250014b/" target="_blank" rel="noopener noreferrer">
+              <svg class="icon" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+              LinkedIn
+            </a>
+          </div>
+
+          <div class="email">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <a href="mailto:sidaty.elhadramy@unibas.ch">sidaty.elhadramy [@] unibas.ch</a>
+          </div>
+        </div>
+      </div>
+
+      <h2>About</h2>
+      <p class="bio">I am a Postdoctoral Researcher in the Center for Image Analysis and Navigation (<a href="https://dbe.unibas.ch/en/cian/">CIAN</a>) at the University of Basel, where I work under the supervision of <a href="https://scholar.google.com/citations?user=pO9ggmcAAAAJ&hl=en">Prof. Philippe C. Cattin</a>. My research lies at the intersection of <strong>artificial intelligence</strong>, <strong>medical imaging</strong>, and <strong>soft-tissue biomechanics</strong>, with a focus on developing solutions for surgical guidance systems. I am particularly interested in building medical <strong>image registration</strong> frameworks that can be seamlessly integrated into real-time augmented reality systems while respecting the underlying physical properties and behavior of biological tissues.</p>
+      </br>
+      <p class="bio">I received my PhD in Computer Science from the University of Strasbourg, where I worked in two leading research groups: the <a href="https://mimesis.inria.fr/">MIMESIS</a> team at Inria, led by <a href="https://scholar.google.com/citations?user=7siqmQwAAAAJ&hl=fr/">Prof. Stéphane Cotin</a>, and <a href="https://camma.unistra.fr/">CAMMA</a> at IHU Strasbourg, led by <a href="https://scholar.google.com/citations?user=aj84iHAAAAAJ&hl=fr">Prof. Nicolas Padoy</a>. My doctoral research focused on developing the first use of IntraVascular Ultrasound (IVUS) imaging in an augmented reality system to assist liver surgery. This work required tackling several technical challenges at the intersection of multiple disciplines. I developed computational methods that integrate AI with the finite element method to achieve real-time and accurate simulation of soft-tissue deformation. I also developed AI-based techniques for registration, reconstruction and segmentation of ultrasound data, with the goal of enabling accurate and efficient intraoperative workflows.  </p>
+      </br>
+      
+      <p class="bio">Before embarking on my doctoral studies, I obtained my engineering degree from École des Mines de Saint-Étienne in France, where I developed a strong foundation in applied mathematics, computer science, and engineering principles that continue to inform my interdisciplinary research approach.</p>
+
+      <div class="research-spotlight">
+        <h3>Current Research Focus</h3>
+        <p style="text-align: justify">Implicit Neural Representations (INRs) can provide continuous and highly differentiable parameterizations of signals that are inherently discrete or discontinuous, such as images. In our previous work, we introduced <a href="https://arxiv.org/pdf/2507.12953?">cIDIR</a>, a conditioned INR framework for deformable image registration. This approach offers the key advantage of producing smooth and fully differentiable displacement fields, enabling the use of advanced regularization schemes (such as bending energy or hyperelastic regularizations) that rely on accurate higher-order gradient computation.
+        </br>
+        <span style="color: red; font-weight: bold; ">However</span>, the framework is fundamentally limited by its patient-specific design (requires a training per pair of images), which restricts its generalization capabilities. <span style="color: green; font-weight: bold; ">To overcome this limitation</span>, I am currently exploring neural-operator–based approaches that learn mappings between function spaces. The objective is to generalize INR-based deformable image registration by predicting an INR describing a displacement field directly from the INRs of the moving and fixed images.</p>
+        
+        <p><strong>I am always open to collaboration. Feel free to drop me an e-mail.</strong></p>
+      </div>
+
+    
+      <h2>News</h2>
+     <div class="news-item">
+        <span class="news-date">Dec 2025</span>
+        <span class="news-content"><strong>cIDIR</strong> selected as a <strong>spotlight presentation</strong> at <strong>MedEurIPS</strong> (Medical Imaging meets EurIPS).</span>
+      </div>
+      <div class="news-item">
+        <span class="news-date">Nov 2025</span>
+        <span class="news-content"><strong>1 paper</strong> accepted at the journal <strong>Engineering with Computers (IF=4.9)</strong>.</span>
+      </div>
+      <div class="news-item">
+        <span class="news-date">Oct 2025</span>
+        <span class="news-content">cIDIR won a <strong>presentation award</strong> at a <strong>MICCAI workshop</strong>.</span>
+      </div>
+      <div class="news-item">
+        <span class="news-date">July 2025</span>
+        <span class="news-content"><strong>3 paper</strong> accepted at <strong>MICCAI AE-CAI, COLLAS and ASMUS workshops</strong>.</span>
+      </div>
+      
+      <div class="news-item">
+        <span class="news-date">June 2025</span>
+        <span class="news-content"><strong>cIDIR</strong> accepted as an <strong>oral presentation</strong> at the <strong>MICCAI RIME workshop</strong>.</span>
+      </div>
+      <div class="news-item">
+        <span class="news-date">Jan 2025</span>
+        <span class="news-content">Deform Any Liver (DAL) accepted as an <strong>oral presentation</strong> at <strong>ISBI</strong>.</span>
+      </div>
+      
+      <div class="news-item">
+        <span class="news-date">Jan 2025</span>
+        <span class="news-content">I Started my postdoctoral position at the <strong>CIAN group</strong>, <strong>University of Basel</strong>, led by Prof. Philippe Cattin.</span>
+      </div>
+      <div class="news-item">
+        <span class="news-date">Dec 2024</span>
+        <span class="news-content">🎓 Successfully <strong>defended my PhD thesis</strong> with committee members: <a href="https://scholar.google.com/citations?user=7xnkHM0AAAAJ&hl=fr">Prof. Hervé Delingette</a>, <a href="https://scholar.google.com/citations?user=MOpg1OoAAAAJ&hl=fr">Prof. Caroline Essert</a>, <a href="https://scholar.google.com/citations?user=Yeq60usAAAAJ&hl=fr">Prof. Yohan Payan</a>, <a href="https://www.ous-research.no/elle/">Prof. Ole Jakob Elle</a>, <a href="https://scholar.google.com/citations?user=7siqmQwAAAAJ&hl=fr">Prof. Stéphane Cotin</a>, and <a href="https://scholar.google.com/citations?user=aj84iHAAAAAJ&hl=fr">Prof. Nicolas Padoy</a>.</span>
+      </div>
+      
+      <div class="news-item">
+        <span class="news-date">July 2024</span>
+        <span class="news-content"><strong>1 paper</strong> accepted at the <strong>MICCAI CBM workshop</strong>.</span>
+      </div>
+      <div class="news-item">
+        <span class="news-date">June 2024</span>
+        <span class="news-content"><strong>1 paper</strong> accepted at the <strong>MICCAI main conference</strong>.</span>
+      </div>
+      <div class="news-item">
+        <span class="news-date">Dec 2023</span>
+        <span class="news-content"><strong>1 paper</strong> accepted as an <strong>oral presentation</strong> at <strong>ISBI</strong>.</span>
+      </div>
+      <div class="news-item">
+        <span class="news-date">July 2023</span>
+        <span class="news-content">Attended the <strong>Oxford Machine Learning for Healthcare Summer School</strong>.</span>
+      </div>
+      <div class="news-item">
+        <span class="news-date">June 2023</span>
+        <span class="news-content"><strong>2 papers</strong> accepted at the <strong>MICCAI main conference</strong>, including one <strong>early accept (top 14%)</strong>.</span>
+      </div>
+      <div class="news-item">
+        <span class="news-date">March 2023</span>
+        <span class="news-content"><strong>SOniCS</strong> accepted for publication in the journal <strong>Engineering with Computers (IF=4.9)</strong>.</span>
+      </div>
+      <div class="news-item">
+        <span class="news-date">Aug 2022</span>
+        <span class="news-content"><strong>SOniCS</strong> won the <strong>Best Presentation Award</strong> at the <strong>FEniCS Conference</strong> in San Diego.</span>
+      </div>
+      <div class="news-item">
+        <span class="news-date">July 2022</span>
+        <span class="news-content"><strong>SOniCS</strong> accepted for presentation at the <strong>FEniCS Conference</strong> in San Diego.</span>
+      </div>
+      <div class="news-item">
+        <span class="news-date">June 2022</span>
+        <span class="news-content"><strong>SOniCS</strong> released as <a href="https://github.com/mimesis-inria/caribou/tree/FeniCS-features">open-source</a> software.</span>
+      </div>
+      <div class="news-item">
+        <span class="news-date">2021</span>
+        <span class="news-content">Started my PhD at <strong>MIMESIS</strong> (Inria) and <strong>CAMMA</strong> labs, supervised by <a href="https://scholar.google.com/citations?user=7siqmQwAAAAJ&hl=fr">Prof. Stéphane Cotin</a>, and <a href="https://scholar.google.com/citations?user=aj84iHAAAAAJ&hl=fr">Prof. Nicolas Padoy</a>.</span></span>
+      </div>
+      <div class="news-item">
+        <span class="news-date">2020</span>
+        <span class="news-content">Obtained my engineering degree from <strong>EMSE</strong> (École des Mines de Saint-Étienne).</span>
+      </div>
+
+      <h2>Selected Publications</h2>
+      <div class="publication">
+        <img src="figures/trakerless.png" alt="Trakerless" class="pub-image">
+        <div class="pub-info">
+          <div class="pub-title">
+            <a href="#">Trackerless volume reconstruction from intraoperative ultrasound images</a>
+          </div>
+          <div class="pub-authors"><strong>Sidaty El Hadramy</strong>, Juan Verde, Karl-Philippe Beaudet, Nicolas Padoy, Stéphane Cotin</div>
+          <div class="pub-venue">MICCAI 2023 <ds style="color: red;">(early accept: top 14%)</ds> [<a href="https://inria.hal.science/hal-04108248/document">paper</a>] [<a href="https://github.com/Sidaty1/IVUS_Trakerless_Volume_Reconstruction">code</a>]</div>
+          <div class="pub-tags">
+            <span class="tag tag-deep-learning">Deep Learning</span>
+            <span class="tag tag-medical-imaging">Medical Imaging</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="publication">
+        <img src="figures/towards.gif" alt="Paper 2" class="pub-image">
+        <div class="pub-info">
+          <div class="pub-title">
+            <a href="#">Towards real-time vessel-guided augmented reality for liver surgery</a>
+          </div>
+          <div class="pub-authors"><strong>Sidaty El Hadramy</strong>, Juan Verde, Nicolas Padoy, Stéphane Cotin</div>
+          <div class="pub-venue">ISBI 2024 [<a href="https://inria.hal.science/hal-04387242v1/document">paper</a>]</div>
+          <div class="pub-tags">
+            <span class="tag tag-deep-learning">Deep Learning</span>
+            <span class="tag tag-biomechanics">Biomechanics</span>
+            <span class="tag tag-medical-imaging">Medical Imaging</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="publication">
+        <img src="figures/dal.png" alt="DAL" class="pub-image">
+        <div class="pub-info">
+          <div class="pub-title">
+            <a href="#">Deform any liver in real-time</a>
+          </div>
+          <div class="pub-authors"><strong>Sidaty El Hadramy</strong>, Nicolas Padoy, Stéphane Cotin</div>
+          <div class="pub-venue">ISBI 2025 [<a href="https://hal.science/hal-04834198v1/document">paper</a>]</div>
+          <div class="pub-tags">
+            <span class="tag tag-deep-learning">Deep Learning</span>
+            <span class="tag tag-biomechanics">Biomechanics</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Publications Page -->
+    
+    <div id="publications" class="page">
+      <h1>Publications</h1>
+      <strong> *: Shared frist authorship.</strong>
+
+      <div class="year-section">
+        <h2 class="year-title">2025</h2>
+        <div class="pub-item">
+          <img src="figures/cIDIR.png" alt="cIDIR" class="pub-item-image">
+          <div class="pub-item-content">
+            <h3 class="pub-title">
+              <a href="#">cIDIR: Conditioned Implicit Neural Representation for Regularized Deformable Image Registration</a>
+            </h3>
+            <div class="pub-authors"><strong>Sidaty El Hadramy</strong>, Oumeymah Cherkaoui Philippe C. Cattin</div>
+            <div class="pub-venue">MICCAI RIME [<a href="https://arxiv.org/pdf/2507.12953?">paper</a>]</div>
+            <div class="pub-tags">
+              <span class="tag tag-deep-learning">Deep Learning</span>
+              <span class="tag tag-medical-imaging">Medical Imaging</span>
+            </div>
+          </div>
+        </div>
+        <div class="pub-item">
+          <img src="figures/optimization_beam.gif" alt="Optimization in latent space" class="pub-item-image">
+          <div class="pub-item-content">
+            <h3 class="pub-title">
+              <a href="https://hal.science/hal-04834276v1/file/Optimization_in_latent_space_for_real-time_intraoperative_characterization_of_digital_twins.pdf">Optimization in latent space for real-time intraoperative characterization of digital twins</a>
+            </h3>
+            <div class="pub-authors"><strong>Sidaty El Hadramy</strong>, Belkacem Acidi, Nicolas Padoy, Stéphane Cotin</div>
+            <div class="pub-venue">Journal of Engineering with Computers (IF=4.9)</div>
+            <div class="pub-tags">
+              <span class="tag tag-deep-learning">Deep Learning</span>
+              <span class="tag tag-biomechanics">Biomechanics</span>
+            </div>
+          </div>
+        </div>
+        <div class="pub-item">
+          <img src="figures/dal.png" alt="DAL" class="pub-item-image">
+          <div class="pub-item-content">
+            <h3 class="pub-title">
+              <a href="">Deform any liver in Real-time</a>
+            </h3>
+            <div class="pub-authors"><strong>Sidaty El Hadramy</strong>, Nicolas Padoy, Stéphane Cotin</div>
+          <div class="pub-venue">ISBI [<a href="https://hal.science/hal-04834198v1/document">paper</a>]</div>
+          <div class="pub-tags">
+            <span class="tag tag-deep-learning">Deep Learning</span>
+            <span class="tag tag-biomechanics">Biomechanics</span>
+          </div>
+          </div>
+        </div>
+        <div class="pub-item">
+          <img src="figures/calib.gif" alt="IVUS-calib" class="pub-item-image">
+          <div class="pub-item-content">
+            <h3 class="pub-title">
+              <a href="">Optimization-Based Calibration for Intravascular
+Ultrasound Volume Reconstruction</a>
+            </h3>
+            <div class="pub-authors">Karl-Philippe Beaudet∗, <strong>Sidaty El Hadramy∗</strong>, Philippe C. Cattin, Juan Verde, and Stéphane Cotin</div>
+          <div class="pub-venue">MICCAI ASMUS [<a href="https://arxiv.org/pdf/2508.20605?">paper</a>]</div>
+          <div class="pub-tags">
+            <span class="tag tag-deep-learning">Deep Learning</span>
+            <span class="tag tag-medical-imaging">Medical image analysis</span>
+          </div>
+          </div>
+        </div>
+        <div class="pub-item">
+          <img src="figures/collas.gif" alt="MR planning" class="pub-item-image">
+          <div class="pub-item-content">
+            <h3 class="pub-title">
+              Towards MR-Based Trochleoplasty Planning
+            </h3>
+            <div class="pub-authors">Michael Wehrli, Alicia Durrer, Paul Friedrich, <strong>Sidaty El Hadramy</strong>, Luana Brahaj, Carol C. Hasler, Philippe C. Cattin</div>
+          <div class="pub-venue">MICCAI COLLAS [<a href="https://arxiv.org/pdf/2508.06076?">paper</a>]</div>
+          <div class="pub-tags">
+            <span class="tag tag-deep-learning">Deep Learning</span>
+            <span class="tag tag-medical-imaging">Medical image analysis</span>
+          </div>
+          </div>
+        </div>
+        <div class="pub-item">
+          <img src="figures/soft.png" alt="Soft and hard tissue simulation" class="pub-item-image">
+          <div class="pub-item-content">
+            <h3 class="pub-title">
+              Soft Tissue Simulation and Force Estimation from Heterogeneous Structures using Equivariant Graph Neural Networks
+            </h3>
+            <div class="pub-authors">Madina Kojanazarova, <strong>Sidaty El Hadramy</strong>, Jack Wilkie, Georg Rauter, Philippe C. Cattin</div>
+          <div class="pub-venue">MICCAI AE-CAI [<a href="https://arxiv.org/pdf/2509.10125">paper</a>]</div>
+          <div class="pub-tags">
+            <span class="tag tag-deep-learning">Deep Learning</span>
+            <span class="tag tag-biomechanics">Biomechanics</span>
+          </div>
+          </div>
+        </div>
+        
+      </div>
+
+      <div class="year-section">
+        <h2 class="year-title">2024</h2>
+        <div class="pub-item">
+          <img src="figures/hyperumesh.png" alt="Paper 3" class="pub-item-image">
+          <div class="pub-item-content">
+            <h3 class="pub-title">
+              <a href="#">HyperU-Mesh: Real-time deformation of soft-tissues across variable patient-specific parameters</a>
+            </h3>
+            <div class="pub-authors"><strong>Sidaty El Hadramy</strong>, Nicolas Padoy, Stéphane Cotin</div>
+            <div class="pub-venue">MICCAI CBM [<a href=""> paper</a>]</div>
+            <div class="pub-tags">
+              <span class="tag tag-deep-learning">Deep Learning</span>
+            <span class="tag tag-biomechanics">Biomechanics</span>
+            </div>
+          </div>
+        </div>
+        <div class="pub-item">
+          <img src="figures/miccai2024.png" alt="" class="pub-item-image">
+          <div class="pub-item-content">
+            <h3 class="pub-title">
+              <a href="#">Towards Real-time Intrahepatic Vessel Identification in Intraoperative Ultrasound-Guided Liver Surgery</a>
+            </h3>
+            <div class="pub-authors">Karl-Philippe Beaudet, Alexandros Karargyris, <strong>Sidaty El Hadramy</strong>, Stéphane Cotin, Jean-Paul Mazellier, Nicolas Padoy, Juan Verde</div>
+            <div class="pub-venue">MICCAI [<a href=""> paper</a>]</div>
+            <div class="pub-tags">
+              <span class="tag tag-deep-learning">Deep Learning</span>
+              <span class="tag tag-medical-imaging">Medical Image Analysis</span>
+            </div>
+          </div>
+        </div>
+        <div class="pub-item">
+          <img src="figures/towards.gif" alt="Paper 3" class="pub-item-image">
+          <div class="pub-item-content">
+            <h3 class="pub-title">
+              <a href="#">Towards real-time vessel-guided augmented reality for liver surgery</a>
+            </h3>
+            <div class="pub-authors"><strong>Sidaty El Hadramy</strong>, Juan Verde, Nicolas Padoy, Stéphane Cotin</div>
+            <div class="pub-venue">ISBI [<a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10635104"> paper</a>]</div>
+            <div class="pub-tags">
+              <span class="tag tag-deep-learning">Deep Learning</span>
+            <span class="tag tag-biomechanics">Biomechanics</span>
+            <span class="tag tag-medical-imaging">Medical Image Analysis</span>
+            </div>
+          </div>
+        </div>
+        
+        
+      </div>
+
+      <div class="year-section">
+        <h2 class="year-title">2023</h2>
+        <div class="pub-item">
+          <img src="figures/trakerless.png" alt="Paper 6" class="pub-item-image">
+          <div class="pub-item-content">
+            <h3 class="pub-title">
+              <a href="#">Trakerless volume reconstruction from intraoperative ultrasound images</a>
+            </h3>
+            <div class="pub-authors"><strong>Sidaty El Hadramy</strong>, Juan Verde, Karl-Philippe Beaudet, Nicolas Padoy, Stéphane Cotin</div>
+            <div class="pub-venue">MICCAI 2023 <ds style="color: red;">(early accept: top 14%)</ds> [<a href="https://inria.hal.science/hal-04108248/document">paper</a>] [<a href="https://github.com/Sidaty1/IVUS_Trakerless_Volume_Reconstruction">code</a>]</div>
+            <div class="pub-tags">
+              <span class="tag tag-deep-learning">Deep Learning</span>
+              <span class="tag tag-medical-imaging">Medical Image Analysis</span>
+            </div>
+          </div>
+        </div>
+        <div class="pub-item">
+          <img src="figures/needle.gif" alt="Paper 7" class="pub-item-image">
+          <div class="pub-item-content">
+            <h3 class="pub-title">
+              <a href="#">Intraoperative CT augmentation for needle-based liver interventions</a>
+            </h3>
+            <div class="pub-authors"><strong>Sidaty El Hadramy</strong>, Juan Verde, Nicolas Padoy, Stéphane Cotin</div>
+            <div class="pub-venue">MICCAI [<a href="https://github.com/Sidaty1/Intraoperative_CT_augmentation">paper</a>] [<a href="https://github.com/Sidaty1/Intraoperative_CT_augmentation">code</a>]</div>
+            <div class="pub-tags">
+              <span class="tag tag-deep-learning">Deep Learning</span>
+              <span class="tag tag-medical-imaging">Medical Image Analysis</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="pub-item">
+          <img src="figures/sonics_haptic.gif" alt="Sonics" class="pub-item-image">
+          <div class="pub-item-content">
+            <h3 class="pub-title">
+              <a href="#">Sonics: develop intuition on biomechanical systems through interactive error controlled simulations</a>
+            </h3>
+            <div class="pub-authors">Arnaud Mazier*, <strong>Sidaty El Hadramy*</strong>, Jean-Nicolas Brunet, Jack S Hale, Stéphane Cotin, Stéphane PA Bordas</div>
+            <div class="pub-venue">Journal of Engineering with computers (IF=4.9)  [<a href="https://link.springer.com/article/10.1007/s00366-023-01877-w"> paper</a>]</div>
+            <div class="pub-tags">
+              <span class="tag tag-biomechanics">Biomechanics</span>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+    <div class="year-section">
+        <h2 class="year-title">2022</h2>
+        <div class="pub-item">
+          <img src="figures/sonics2022.png" alt="Paper 6" class="pub-item-image">
+          <div class="pub-item-content">
+            <h3 class="pub-title">
+              <a href="#">SOniCS: Interfacing SOFA and FEniCS for advanced constitutive models</a>
+            </h3>
+            <div class="pub-authors">Arnaud Mazier, <strong>Sidaty El Hadramy</strong>, Jean-Nicolas Brunet, Jack HALE, Stéphane Cotin, Stéphane BORDAS</div>
+            <div class="pub-venue">FEniCS 2022 [<a href="https://orbilu.uni.lu/handle/10993/51743">paper</a>] </div>
+            <div class="pub-tags">
+              <span class="tag tag-deep-learning">Deep Learning</span>
+              <span class="tag tag-medical-imaging">Medical Image Analysis</span>
+            </div>
+          </div>
+        </div>
+        
+        
+      </div>
+    </div>
+    
+    
+  </main>
+
+  <footer>
+    <p>© 2025 Sidaty El Hadramy, PhD. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Simple page navigation
+    const navLinks = document.querySelectorAll('.nav-link');
+    const pages = document.querySelectorAll('.page');
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Remove active class from all links and pages
+        navLinks.forEach(l => l.classList.remove('active'));
+        pages.forEach(p => p.classList.remove('active'));
+        
+        // Add active class to clicked link
+        link.classList.add('active');
+        
+        // Show corresponding page
+        const pageId = link.getAttribute('data-page');
+        document.getElementById(pageId).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
